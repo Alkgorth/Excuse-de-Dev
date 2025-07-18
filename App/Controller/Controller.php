@@ -1,5 +1,5 @@
 <?php
-/*
+
 namespace App\Controller;
 
 class Controller
@@ -10,7 +10,7 @@ class Controller
             if (isset($_GET['controller'])) {
                 switch ($_GET['controller']) {
                     case 'pages':
-                        $pageController = new UserController();
+                        $pageController = new HomeController();
                         $pageController->route();
                         break;
                     default:
@@ -19,7 +19,7 @@ class Controller
                 }
             } else {
 
-                $pageController = new UserController();
+                $pageController = new HomeController();
                 $pageController->home();
             }
         } catch (\Exception $e) {
