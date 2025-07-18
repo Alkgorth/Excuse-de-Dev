@@ -1,7 +1,10 @@
 FROM php:8.3.14-apache
 
-RUN apt-get update
+RUN apt-get update && apt-get install -y \
+        git \
+        unzip \
+    && docker-php-ext-install pdo pdo_mysql
 
-COPY . .
+COPY . /var/www/html
 
-COPY --from=composer:latest /usr/bin/composer usr/local/bin/composer
+COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
