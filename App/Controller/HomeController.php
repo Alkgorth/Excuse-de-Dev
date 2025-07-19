@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Controller;
 
 class HomeController extends Controller
@@ -31,12 +30,12 @@ class HomeController extends Controller
         }
     }
 
-        protected function home()
+    protected function home()
     {
         $this->render('pages/home', []);
     }
 
-        protected function lost()
+    protected function lost()
     {
         $this->render('pages/lost', []);
     }

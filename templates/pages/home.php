@@ -14,7 +14,7 @@
         <form class="m-5 p-4" action="">
             <div class="row-col-1 container-fluid text-center">
                 <h1 class="my-2">Mon excuse de dev</h1>
-        
+
                 <input class="my-2" type="text" readonly value="Test texte">
 
                 <div>
@@ -23,7 +23,7 @@
             </div>
 
         </form>
-        
+
     </section>
 </main>
 
