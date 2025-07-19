@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Controller;
 
 class Controller
@@ -24,11 +23,10 @@ class Controller
             }
         } catch (\Exception $e) {
             $this->render('errors/default', [
-                'error' => $e->getMessage()
+                'error' => $e->getMessage(),
             ]);
         }
     }
-
 
     protected function render(string $path, array $params = []): void
     {
@@ -36,7 +34,7 @@ class Controller
         $filePath = _ROOTPATH_ . '/templates/' . $path . '.php';
 
         try {
-            if (!file_exists($filePath)) {
+            if (! file_exists($filePath)) {
                 throw new \Exception("Fichier non trouvé : " . $filePath);
             } else {
                 extract($params);
@@ -44,7 +42,7 @@ class Controller
             }
         } catch (\Exception $e) {
             $this->render('errors/default', [
-                'error' => $e->getMessage()
+                'error' => $e->getMessage(),
             ]);
         }
     }
