@@ -1,4 +1,14 @@
-// Redirection après 5 secondes
-setTimeout(function () {
-  window.location.href = "/"; // Redirige vers la page principale
-}, 5000); // 5000 millisecondes = 5 secondes
+
+function pageLostRedirection() {
+    if (document.body.id === 'lost-page') {
+        
+        setTimeout(function () {
+          window.location.href = "/";
+        }, 5000);
+    }
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    pageLostRedirection();
+    
+})
