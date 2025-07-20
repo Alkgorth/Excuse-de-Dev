@@ -15,15 +15,14 @@
             <div class="row-col-1 container-fluid text-center">
                 <h1 class="my-2">Mon excuse de dev</h1>
 
-                <input class="my-2" type="text" readonly value="Test texte">
+                <textarea name="excuses" id="inputExcuse" class="my-2" readonly value="Test texte"></textarea>
+                <!-- <input id="inputExcuse" class="my-2" type="text" readonly value="Test texte" width="100"> -->
 
                 <div>
-                    <button class="btn btn-primary my-2" type="button" name="excuses">Générer une nouvelle phrase</button>
+                    <button class="btn btn-primary my-2" type="button" name="excuses" id="excuses">Générer une nouvelle phrase</button>
                 </div>
             </div>
-
         </form>
-
     </section>
 </main>
 
