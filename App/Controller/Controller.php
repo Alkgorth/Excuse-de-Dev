@@ -12,6 +12,10 @@ class Controller
                         $pageController = new HomeController();
                         $pageController->route();
                         break;
+                    case 'apiExcuses':
+                        $pageController = new ApiExcusesController();
+                        $pageController->route();
+                        break;
                     default:
                         throw new \Exception("Désolé cette page n'existe pas 😣");
                         break;
