@@ -26,7 +26,7 @@ class Controller
                 $pageController->home();
             }
         } catch (\Exception $e) {
-            $this->render('errors/default', [
+            $this->render('errors/lost', [
                 'error' => $e->getMessage(),
             ]);
         }
@@ -45,7 +45,7 @@ class Controller
                 require_once $filePath;
             }
         } catch (\Exception $e) {
-            $this->render('errors/default', [
+            $this->render('errors/lost', [
                 'error' => $e->getMessage(),
             ]);
         }
