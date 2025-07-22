@@ -62,6 +62,8 @@ class ApiExcusesController extends Controller
         echo json_encode(['excuse' => $randomExcuse]);
     }
 
+
+
     public function addExcuses() {
         
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
@@ -75,6 +77,12 @@ class ApiExcusesController extends Controller
         if (!isset($input['http_code'], $input['tag'], $input['message'])) {
             http_response_code((400));
             echo json_encode(['error' => 'Données incomplètes']);
+            return;
+        }
+
+        if (!is_numeric($input['http_code']) || (int)$input['http_code'] <= 0) {
+            http_response_code(400);
+            echo json_encode(['error' => 'La donnée saisie n\'est pas un entier positif']);
             return;
         }
 
@@ -93,14 +101,26 @@ class ApiExcusesController extends Controller
         }
 
         $excuses = json_decode(file_get_contents($file), true);
-
-        if (!is_array($excuses)) {
+         if (!is_array($excuses)) {
             $excuses = [];
+        }
+
+        foreach ($excuses as $excuse) {
+            if ((int)$excuse['http_code'] === $newExcuse['http_code']) {
+                http_response_code(409);
+                echo json_encode(['error' => 'Une excuse avec ce code HTTP existe déjà.']);
+                exit;
+            }
         }
 
         $excuses[] = $newExcuse;
 
-        file_put_contents($file, json_encode($excuses, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+        $jsonData = json_encode($excuses, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+        if (file_put_contents($file, $jsonData) === false) {
+            http_response_code(500);
+            echo json_encode(['error' => 'Erreur lors de l\'écriture du fichier']);
+            return;
+        }
 
         echo json_encode(['success' => true, 'message' => 'Excuse ajoutée']);
     }

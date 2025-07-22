@@ -14,6 +14,9 @@
                 <div id="excuseDisplay" class="p-3 my-2 border rounded bg-light text-dark">
                     Cliquez sur le bouton pour générer une excuse.
                 </div>
+                <div id="loader" class="text-center mt-2">
+                    <p>Chargement de l'excuse...</p>
+                </div>
                 <div>
                     <button class="btn btn-primary my-2" type="button" name="excuses" id="excuses">Générer une nouvelle phrase</button>
                 </div>
@@ -67,8 +70,8 @@
                                         <?php }?>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                    <button type="submit" id="saveExcuse" class="btn btn-primary">Save changes</button>
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                                    <button type="submit" id="saveExcuse" class="btn btn-primary">Sauvegarder l'excuse</button>
                                 </div>
                             </form>
                         </div>
@@ -77,9 +80,6 @@
             </div>
         </div>
     </section>
-
-    
-
 </main>
 <?php
     require_once _ROOTPATH_ . '/templates/footer.php';
