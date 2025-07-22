@@ -10,5 +10,21 @@ spl_autoload_register();
 
 use App\Controller\Controller;
 
+if (isset($_GET['http_code'])) {
+    $code = (int) $_GET['http_code'];
+    $excuses = json_decode(file_get_contents(__DIR__ . '/Assets/data/excuses.json'), true);
+
+    $excuse = null;
+    foreach ($excuses as $e) {
+        if ((int)$e['http_code'] === $code) {
+            $excuse = $e;
+            break;
+        }
+    }
+
+    require_once __DIR__ . '/templates/errors/http_code.php';
+    exit;
+}
+
 $controller = new Controller;
 $controller->route();

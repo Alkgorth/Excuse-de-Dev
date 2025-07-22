@@ -26,7 +26,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
       const data = await response.json();
       const dataExcuse = data.excuse;
-
+      
+      excuseDisplay.classList.add("flash");
+      setTimeout(() => {
+        
         if (dataExcuse && dataExcuse.message && dataExcuse.tag) {
         excuseDisplay.textContent = `http_code : ${dataExcuse.http_code}, tag : ${dataExcuse.tag}, message : ${dataExcuse.message}`;
       } else if (dataExcuse && dataExcuse.message) {
@@ -34,6 +37,10 @@ document.addEventListener("DOMContentLoaded", function () {
       } else {
         excuseDisplay.textContent = "Erreur : aucune excuse trouvée";
       }
+
+      excuseDisplay.classList.remove("flash");
+    }, 100);
+
       
     } catch (error) {
       excuseDisplay.textContent = "Erreur réseau ou serveur";
