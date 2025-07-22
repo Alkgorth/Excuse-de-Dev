@@ -5,10 +5,6 @@
 ?>
 <body id="lost-page">
 <main>
-    <section>
-        <h1>Page "You'r lost !"</h1>
-    </section>
-
     <section class="row d-flex container justify-content-center mx-auto">
 
         <div class=" container-fluid text-center">

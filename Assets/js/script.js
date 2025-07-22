@@ -17,12 +17,11 @@ async function excuseInitiale() {
   excuseDisplay.style.display = "none";
   loadExcuseButton.style.display = "none";
 
-  const delai = Math.floor(Math.random() * 3000) + 1000;
+  const delai = Math.floor(Math.random() * 1000) + 1000;
   await new Promise(resolve => setTimeout(resolve, delai));
 
   console.log(`Delai de l'affichage au chargement : ${delai}ms`);
-
-
+  
   try {
     const response = await fetch(
       "index.php?controller=apiExcuses&action=getExcuses"
