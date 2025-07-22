@@ -47,4 +47,44 @@ document.addEventListener("DOMContentLoaded", function () {
       console.error("Erreur : ", error);
     }
   });
+
+  const addExcusesForm = document.getElementById('addExcusesForm');
+
+  addExcusesForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const http_code = document.getElementById('http_code').value;
+    const tag = document.getElementById('tag').value;
+    const message = document.getElementById('message').value;
+
+    try {
+      const response = await fetch(`index.php?controller=apiExcuses&action=addExcuses`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          http_code: parseInt(http_code),
+          tag: tag.trim(),
+          message: message.trim()
+        })
+      });
+
+      const result = await response.json();
+      console.log('Réponse du serveur :', result);
+
+      if (!response.ok) {
+        throw new Error(result.error || 'Une erreur est survenue');
+      }
+
+      alert('Excuse ajoutée avec succès !');
+      addExcusesForm.reset();
+      const modal = bootstrap.Modal.getInstance(document.getElementById('excuseModal'));
+      modal.hide();
+      
+    } catch (error) {
+      console.error('Erreur :', error);
+      alert('Échec de l’ajout : ' + error.message);
+    }
+  });
 });
