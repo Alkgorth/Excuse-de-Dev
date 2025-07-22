@@ -17,8 +17,11 @@ async function excuseInitiale() {
   excuseDisplay.style.display = "none";
   loadExcuseButton.style.display = "none";
 
-  const delai = Math.floor(Math.random() * 500) + 1000;
+  const delai = Math.floor(Math.random() * 3000) + 1000;
   await new Promise(resolve => setTimeout(resolve, delai));
+
+  console.log(`Delai de l'affichage au chargement : ${delai}ms`);
+
 
   try {
     const response = await fetch(
@@ -29,12 +32,15 @@ async function excuseInitiale() {
       throw new Error("Réponse HTTP non valide");
     }
 
+    const typeContenue = response.headers.get("Content-Type") || "";
+    if (!typeContenue.includes("application/json")) {
+      throw new Error("La réponse du serveur n'est pas du JSON.");
+    }
+
     const data = await response.json();
     const dataExcuse = data.excuse;
 
-    if (dataExcuse && dataExcuse.message && dataExcuse.tag) {
-      excuseDisplay.textContent = `http_code : ${dataExcuse.http_code}, tag : ${dataExcuse.tag}, message : ${dataExcuse.message}`;
-    } else if (dataExcuse && dataExcuse.message) {
+    if (dataExcuse && dataExcuse.message) {
       excuseDisplay.textContent = dataExcuse.message;
     } else {
       excuseDisplay.textContent = "Aucune excuse disponible.";
@@ -57,12 +63,15 @@ async function displayNewExcuse() {
   const loader = document.getElementById("loader");
   const loadExcuseButton = document.getElementById("excuses");
 
+  loadExcuseButton.disabled = true;
   loader.style.display = "block";
   excuseDisplay.style.display = "none";
   loadExcuseButton.style.display = "none";
 
-  const delai = Math.floor(Math.random() * 5000) + 1000;
+  const delai = Math.floor(Math.random() * 4000) + 1000;
   await new Promise(resolve => setTimeout(resolve, delai));
+
+  console.log(`Delai du chargement de la nouvelle excuse : ${delai}ms`);
 
   try {
     const response = await fetch(
@@ -76,9 +85,7 @@ async function displayNewExcuse() {
     const data = await response.json();
     const dataExcuse = data.excuse;
 
-    if (dataExcuse && dataExcuse.message && dataExcuse.tag) {
-      excuseDisplay.textContent = `http_code : ${dataExcuse.http_code}, tag : ${dataExcuse.tag}, message : ${dataExcuse.message}`;
-    } else if (dataExcuse && dataExcuse.message) {
+    if (dataExcuse && dataExcuse.message) {
       excuseDisplay.textContent = dataExcuse.message;
     } else {
       excuseDisplay.textContent = "Erreur : aucune excuse trouvée.";
@@ -87,7 +94,7 @@ async function displayNewExcuse() {
     excuseDisplay.classList.add("flash");
     setTimeout(() => {
       excuseDisplay.classList.remove("flash");
-    }, 100);
+    }, 500);
 
   } catch (error) {
     excuseDisplay.textContent = "Erreur réseau ou serveur";
@@ -97,6 +104,7 @@ async function displayNewExcuse() {
   excuseDisplay.style.display = "block";
   loadExcuseButton.style.display = "inline-block";
   loader.style.display = "none";
+  loadExcuseButton.disabled = false;
 }
 
 
@@ -110,6 +118,11 @@ function setupAddExcuses() {
   const http_code = document.getElementById('http_code').value;
   const tag = document.getElementById('tag').value;
   const message = document.getElementById('message').value;
+
+  if (!http_code || !tag.trim() || !message.trim()){
+    alert("Tous les champs doivent être renseignés.");
+    return;
+  }
 
   try {
     const response = await fetch(`index.php?controller=apiExcuses&action=addExcuses`, {
@@ -155,9 +168,22 @@ function setupAddExcuses() {
 document.addEventListener("DOMContentLoaded", function () {
   pageLostRedirection();
 
+  const title = document.getElementById("titreHome");
+  const excuseDisplay = document.getElementById("excuseDisplay");
+
   excuseInitiale();
 
   const generateButton = document.getElementById("excuses");
+  
+  setTimeout(() => {
+    title.classList.add("visible");
+  }, 100);
+
+  setTimeout(() => {
+    excuseDisplay.classList.add("visible");
+    generateButton.classList.add("visible");
+  }, 2000);
+
   generateButton.addEventListener("click", displayNewExcuse);
 
   setupAddExcuses();

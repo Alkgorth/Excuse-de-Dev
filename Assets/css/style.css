@@ -12,13 +12,53 @@ body {
     padding-bottom: 60px; 
 }
 
+#titreHome {
+    opacity: 0;
+    transform: translateY(150px);
+    transition: all 1s ease-in-out;
+    position: relative;
+}
+
+#titreHome.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+#excuses {
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+    transition-delay: 0s;
+    pointer-events: none;
+}
+
+#excuses.visible {
+    opacity: 1;
+    transition-delay: 0.5s;
+    pointer-events: auto;
+}
+
+#excuseDisplay {
+    font-size: 1.2rem;
+    font-weight: 500;
+    min-height: 60px;
+    line-height: 1.4;
+    background-color: #e9ecef;
+    transition: background-color 0.7s ease-in-out;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+
+#excuseDisplay.visible {
+    opacity: 1;
+}
+
 .flash {
-    animation: flashHighlight 0.6s ease-in-out;
+    animation: flashHighlight 0.7s ease-in-out;
 }
 
 @keyframes flashHighlight {
-    from { background-color: #ff5050; }
-    to { background-color: #025ab3; }
+    0% { background-color: #ffe6e6; }
+    100% { background-color: #e9ecef; }
 }
 
 #loader {
