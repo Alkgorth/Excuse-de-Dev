@@ -418,5 +418,10 @@
         "http_code": 112,
         "tag": "Test maj",
         "message": "test 8"
+    },
+    {
+        "http_code": 555,
+        "tag": "Test 9",
+        "message": "Neuvième test"
     }
 ]

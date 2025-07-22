@@ -1,0 +1,5 @@
+RewriteEngine On
+RewriteRule ^rewriteme$ rewrite_test.php [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.+)$ index.php?http_code=$1 [QSA,L]

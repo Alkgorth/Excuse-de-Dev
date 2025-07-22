@@ -3,25 +3,24 @@
 ?>
 <body>
 <main class="p-4">
-    <section>
-        <h2>Page home</h2>
-    </section>
+
     <section class="row d-flex container justify-content-center mx-auto">
-        <div class="container-fluid d-flex justify-content-center">
-        <form class="m-5 p-4" action="">
+        <div class="m-5 p-4 container-fluid d-flex justify-content-center">
             <div class="container-fluid text-center">
-                <h1 class="my-2">Mon excuse de dev</h1>
-                <div id="excuseDisplay" class="p-3 my-2 border rounded bg-light text-dark">
+                <h1 class="my-2" id="titreHome">Mon excuse de dev</h1>
+                <div id="excuseDisplay" class="p-3 my-2 border rounded text-dark">
                     Cliquez sur le bouton pour générer une excuse.
                 </div>
                 <div id="loader" class="text-center mt-2">
+                    <div class="spinner-border text-primary" role="status" aria-hidden="true"></div>
                     <p>Chargement de l'excuse...</p>
                 </div>
                 <div>
-                    <button class="btn btn-primary my-2" type="button" name="excuses" id="excuses">Générer une nouvelle phrase</button>
+                    <button class="btn btn-primary my-2" type="button" name="excuses" id="excuses" aria-label="Générer une nouvelle excuse">
+                        Générer une nouvelle excuse
+                    </button>
                 </div>
             </div>
-        </form>
         </div>
     </section>
 

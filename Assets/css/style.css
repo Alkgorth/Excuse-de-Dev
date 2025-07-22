@@ -12,13 +12,50 @@ body {
     padding-bottom: 60px; 
 }
 
+#titreHome {
+    opacity: 0;
+    transform: translateY(50%);
+    transition: all 1s ease-in-out;
+    position: relative;
+}
+
+#titreHome.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+#titreHome.move-up {
+    transform: translateY(-120px);
+    transition: transform 1s ease-in-out;
+}
+
+#excuses {
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+    pointer-events: none;
+}
+
+#excuses.visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+#excuseDisplay {
+    font-size: 1.2rem;
+    font-weight: 500;
+    min-height: 60px;
+    line-height: 1.4;
+    background-color: #e9ecef;
+    transition: background-color 0.7s ease-in-out;
+}
+
 .flash {
-    animation: flashHighlight 0.6s ease-in-out;
+    animation: flashHighlight 0.7s ease-in-out;
 }
 
 @keyframes flashHighlight {
-    from { background-color: #ff5050; }
-    to { background-color: #025ab3; }
+    0% { background-color: #ffe6e6; }
+    100% { background-color: #e9ecef; }
 }
 
 #loader {
