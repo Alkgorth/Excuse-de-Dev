@@ -20,3 +20,7 @@ body {
     from { background-color: #ff5050; }
     to { background-color: #025ab3; }
 }
+
+#loader {
+    display: none;
+}

@@ -393,5 +393,30 @@
         "http_code": 236,
         "tag": "Test 2",
         "message": "Un troisième test"
+    },
+    {
+        "http_code": 237,
+        "tag": "Test 4",
+        "message": "Quatrième Test"
+    },
+    {
+        "http_code": 238,
+        "tag": "Test 5",
+        "message": "Cinuième Test"
+    },
+    {
+        "http_code": 239,
+        "tag": "Test 6",
+        "message": "Sixième Test"
+    },
+    {
+        "http_code": 111,
+        "tag": "Test 7",
+        "message": "Septième test"
+    },
+    {
+        "http_code": 112,
+        "tag": "Test maj",
+        "message": "test 8"
     }
 ]
