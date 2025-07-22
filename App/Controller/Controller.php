@@ -17,7 +17,7 @@ class Controller
                         $pageController->route();
                         break;
                     default:
-                        throw new \Exception("Désolé cette page n'existe pas 😣");
+                        throw new \Exception("404");
                         break;
                 }
             } else {
@@ -26,9 +26,15 @@ class Controller
                 $pageController->home();
             }
         } catch (\Exception $e) {
-            $this->render('errors/default', [
-                'error' => $e->getMessage(),
-            ]);
+            $message = $e->getMessage();
+
+            if ($message === "404") {
+                $this->render('errors/404');
+            } else {
+                $this->render('errors/lost', [
+                    'error' => $e->getMessage(),
+                ]);
+            }
         }
     }
 
@@ -45,7 +51,7 @@ class Controller
                 require_once $filePath;
             }
         } catch (\Exception $e) {
-            $this->render('errors/default', [
+            $this->render('errors/404', [
                 'error' => $e->getMessage(),
             ]);
         }

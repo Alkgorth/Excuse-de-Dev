@@ -1,33 +1,83 @@
 <?php
-
     require_once _ROOTPATH_ . '/templates/head.php';
-
 ?>
 <body>
 <main class="p-4">
     <section>
         <h2>Page home</h2>
     </section>
-
-    <section class="row d-flex container justify-content-center">
-
+    <section class="row d-flex container justify-content-center mx-auto">
+        <div class="container-fluid d-flex justify-content-center">
         <form class="m-5 p-4" action="">
-            <div class="row-col-1 container-fluid text-center">
+            <div class="container-fluid text-center">
                 <h1 class="my-2">Mon excuse de dev</h1>
-
-                <textarea name="excuses" id="inputExcuse" class="my-2" readonly value="Test texte"></textarea>
-                <!-- <input id="inputExcuse" class="my-2" type="text" readonly value="Test texte" width="100"> -->
-
+                <div id="excuseDisplay" class="p-3 my-2 border rounded bg-light text-dark">
+                    Cliquez sur le bouton pour générer une excuse.
+                </div>
                 <div>
                     <button class="btn btn-primary my-2" type="button" name="excuses" id="excuses">Générer une nouvelle phrase</button>
                 </div>
             </div>
         </form>
+        </div>
     </section>
+
+    <section class="row d-flex container justify-content-center mx-auto">
+        <!-- Button trigger modal -->
+         <div class="container-fluid text-center">
+            <button type="button" class="btn btn-primary my-2" id="modal" data-bs-toggle="modal" data-bs-target="#excuseModal">
+            Ajouter une nouvelle excuse de dev
+            </button>
+
+            <!-- Modal -->
+            <div class="modal fade" id="excuseModal" tabindex="-1" aria-labelledby="excuseModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="excuseModalLabel">Créez votre excuse</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                           <div class="modal-body">
+                            <form class="m-5 p-4" method="POST" enctype="multipart/form-data">
+                                <div class="mb-3 text-center">
+                                    <label for="http_code" class="form-label">http_code</label>
+                                        <input type="text" class="form-control
+                                        <?php echo(isset($error['http_code']) ? 'is-invalid' : '') ?>" id="http_code" name="http_code" value="" required>
+                                        <?php if (isset($error['http_code'])) {?>
+                                            <div class="invalid-feedback"><?php echo $error['http_code'] ?></div>
+                                        <?php }?>
+                                </div>
+                                <div class="mb-3 text-center">
+                                    <label for="tag" class="form-label">tag</label>
+                                        <input type="text" class="form-control
+                                        <?php echo(isset($error['tag']) ? 'is-invalid' : '') ?>" id="tag" name="tag" value="" required>
+                                        <?php if (isset($error['tag'])) {?>
+                                            <div class="invalid-feedback"><?php echo $error['tag'] ?></div>
+                                        <?php }?>
+                                </div>
+                                <div class="mb-3 text-center">
+                                    <label for="message" class="form-label">message</label>
+                                        <input type="text" class="form-control
+                                        <?php echo(isset($error['message']) ? 'is-invalid' : '') ?>" id="message" name="message" value="" required>
+                                        <?php if (isset($error['message'])) {?>
+                                            <div class="invalid-feedback"><?php echo $error['message'] ?></div>
+                                        <?php }?>
+                                </div>
+                            </form>
+                            </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" id="saveExcuse" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+
 </main>
-
 <?php
-
     require_once _ROOTPATH_ . '/templates/footer.php';
-
 ?>

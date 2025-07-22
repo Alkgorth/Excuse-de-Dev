@@ -11,11 +11,13 @@ class ApiExcusesController extends Controller
         header('Content-Type: application/json');
 
         try {
-            //On met en place une condition pour lancer le bon controller
             if (isset($_GET['action'])) {
                 switch ($_GET['action']) {
                     case 'getExcuses':
                         $this->getExcuses();
+                        break;
+                    case 'addExcuses':
+                        $this->addExcuses();
                         break;
                      default:
                         throw new \Exception("Cette action n'existe pas : " . $_GET['action']);
@@ -25,7 +27,7 @@ class ApiExcusesController extends Controller
                 throw new \Exception("Aucune action détectée");
             }
         } catch (\Exception $e) {
-            $this->render('errors/default', [
+            $this->render('errors/lost', [
                 'error' => $e->getMessage(),
             ]);
         }
@@ -33,22 +35,49 @@ class ApiExcusesController extends Controller
 
     public function getExcuses() {
 
-        if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-            $data = file_get_contents(_ROOTPATH_ . '/Assets/data/excuses.json');
-            echo $data;
-            exit;
+        if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
+            http_response_code(405);
+            echo json_encode(['error' => 'Méthode non autorisée']);
+            return;
         }
 
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $json = file_get_contents('php://input');
-            $newExcuse =json_decode($json, true);
+        $file = _ROOTPATH_ . '/Assets/data/excuses.json';
 
-            $excuses = json_decode(file_get_contents(_ROOTPATH_ . '/Assets/data/excuses.json'), true);
-            $excuses = $newExcuse;
-
-            file_put_contents('./Assets/data/excuses.json', json_encode($excuses, JSON_PRETTY_PRINT));
-            echo json_encode(['status' => 'ok']);
-            exit;
+        if (!file_exists($file)) {
+            http_response_code(404);
+            echo json_encode(['error' => 'Fichier introuvable']);
+            return;
         }
+        
+        $data = json_decode(file_get_contents($file), true);
+
+        
+        if (empty($data) || !is_array($data)) {
+            http_response_code(500);
+            echo json_encode(['error' => 'Données invalides']);
+            return;
+        }
+
+        $randomExcuse = $data[array_rand($data)];
+        echo json_encode(['excuse' => $randomExcuse]);
+    }
+
+    public function addExcuses() {
+        
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            http_response_code(405);
+            echo json_encode(['error' => 'Méthode non autorisée']);
+            return;
+        }
+
+        $file = _ROOTPATH_ . '/Assets/data/excuses.json';
+
+        if (!file_exists($file)) {
+            http_response_code(404);
+            echo json_encode(['error' => 'Fichier introuvable']);
+            return;
+        }
+
+        
     }
 }
