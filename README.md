@@ -39,6 +39,7 @@ Ouvrez votre navigateur à l'adresse suivante :
 👉 http://localhost:8080
 
 # Structure du projet
+```
 Excuse-de-Dev/
 ├── App/
 │   ├── Controller/
@@ -66,6 +67,7 @@ Excuse-de-Dev/
 ├── Dockerfile
 ├── index.php
 └── README.md
+```
 
 ## Utilisation
 ### Générer une excuse
