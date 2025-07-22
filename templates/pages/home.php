@@ -7,8 +7,8 @@
     <section class="row d-flex container justify-content-center mx-auto">
         <div class="m-5 p-4 container-fluid d-flex justify-content-center">
             <div class="container-fluid text-center">
-                <h1 class="my-2" id="titreHome">Mon excuse de dev</h1>
-                <div id="excuseDisplay" class="p-3 my-2 border rounded text-dark">
+                <h1 class="m-2" id="titreHome">Mon excuse de dev</h1>
+                <div id="excuseDisplay" class="p-3 m-4 border rounded text-dark">
                     Cliquez sur le bouton pour générer une excuse.
                 </div>
                 <div id="loader" class="text-center mt-2">

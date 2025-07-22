@@ -169,17 +169,18 @@ document.addEventListener("DOMContentLoaded", function () {
   pageLostRedirection();
 
   const title = document.getElementById("titreHome");
+  const excuseDisplay = document.getElementById("excuseDisplay");
 
   excuseInitiale();
 
   const generateButton = document.getElementById("excuses");
-
+  
   setTimeout(() => {
     title.classList.add("visible");
   }, 100);
 
   setTimeout(() => {
-    title.classList.add("move-up");
+    excuseDisplay.classList.add("visible");
     generateButton.classList.add("visible");
   }, 2000);
 
