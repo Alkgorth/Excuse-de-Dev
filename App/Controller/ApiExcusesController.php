@@ -27,7 +27,7 @@ class ApiExcusesController extends Controller
                 throw new \Exception("Aucune action détectée");
             }
         } catch (\Exception $e) {
-            $this->render('errors/lost', [
+            $this->render('errors/404', [
                 'error' => $e->getMessage(),
             ]);
         }
@@ -70,6 +70,20 @@ class ApiExcusesController extends Controller
             return;
         }
 
+        $input = json_decode(file_get_contents('php://input'), true);
+
+        if (!isset($input['http_code'], $input['tag'], $input['message'])) {
+            http_response_code((400));
+            echo json_encode(['error' => 'Données incomplètes']);
+            return;
+        }
+
+        $newExcuse = [
+            'http_code' => (int)$input['http_code'],
+            'tag' => trim($input['tag']),
+            'message' => trim($input['message']),
+        ];
+
         $file = _ROOTPATH_ . '/Assets/data/excuses.json';
 
         if (!file_exists($file)) {
@@ -78,6 +92,16 @@ class ApiExcusesController extends Controller
             return;
         }
 
-        
+        $excuses = json_decode(file_get_contents($file), true);
+
+        if (!is_array($excuses)) {
+            $excuses = [];
+        }
+
+        $excuses[] = $newExcuse;
+
+        file_put_contents($file, json_encode($excuses, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+
+        echo json_encode(['success' => true, 'message' => 'Excuse ajoutée']);
     }
 }
