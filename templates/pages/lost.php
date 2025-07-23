@@ -1,7 +1,5 @@
 <?php
-
     require_once _ROOTPATH_ . '/templates/head.php';
-
 ?>
 <body id="lost-page">
 <main>
@@ -17,7 +15,5 @@
 </main>
 
 <?php
-
     require_once _ROOTPATH_ . '/templates/footer.php';
-
 ?>
