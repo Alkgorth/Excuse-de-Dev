@@ -423,5 +423,10 @@
         "http_code": 555,
         "tag": "Test 9",
         "message": "Neuvième test"
+    },
+    {
+        "http_code": 666,
+        "tag": "poney",
+        "message": "Je peux pas, j'ai aqua-poney"
     }
 ]
