@@ -6,7 +6,12 @@ error_reporting(E_ALL);
 
 define('_ROOTPATH_', __DIR__);
 define('_TEMPLATEPATH_', __DIR__ . '/templates');
-spl_autoload_register();
+spl_autoload_register(function ($class) {
+    $file = __DIR__ . '/' . str_replace('\\', '/', $class) . '.php';
+    if (file_exists($file)) {
+        require_once $file;
+    }
+});
 
 use App\Controller\Controller;
 
