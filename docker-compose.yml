@@ -8,6 +8,9 @@ services:
       dockerfile: Dockerfile
     container_name: excuses
     restart: unless-stopped
+    volumes:
+      - ./logs:/var/www/html/logs
+      - ./Assets/data:/var/www/html/Assets/data
     networks:
       - traefik-network
     labels:
