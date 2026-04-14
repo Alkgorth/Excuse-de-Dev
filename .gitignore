@@ -1,1 +1,5 @@
 rewrite_test.php
+/logs/
+.env
+.env.local
+*.log
