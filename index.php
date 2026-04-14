@@ -1,7 +1,16 @@
 <?php
 
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
+$isProduction = !in_array($_SERVER['SERVER_NAME'] ?? 'localhost', ['localhost', '127.0.0.1']);
+
+if ($isProduction) {
+    ini_set('display_errors', 0);
+    ini_set('display_startup_errors', 0);
+    ini_set('error_log', __DIR__ . '/logs/error.log');
+} else {
+    ini_set('display_errors', 1);
+    ini_set('display_startup_errors', 1);
+}
+
 error_reporting(E_ALL);
 
 define('_ROOTPATH_', __DIR__);
