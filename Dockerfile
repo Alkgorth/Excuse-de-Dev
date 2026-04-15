@@ -11,7 +11,11 @@ COPY . /var/www/html
 
 RUN sed -i 's|AllowOverride None|AllowOverride All|g' /etc/apache2/apache2.conf
 
-# Corriger les permissions pour que www-data puisse écrire dans les répertoires
+# Copier le script d'entrypoint
+COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
+RUN chmod +x /usr/local/bin/docker-entrypoint.sh
+
+# Créer les dossiers et définir les permissions initiales
 RUN mkdir -p /var/www/html/logs \
     && chown -R www-data:www-data /var/www/html/Assets/data \
     && chmod -R 775 /var/www/html/Assets/data \
@@ -19,3 +23,6 @@ RUN mkdir -p /var/www/html/logs \
     && chmod -R 775 /var/www/html/logs
 
 COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
+
+# Utiliser le script d'entrypoint au démarrage du conteneur
+ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
